@@ -1,7 +1,7 @@
 TrackHack
 ==========
 
-Track all the hacks.
+Track it ship it.
 
 [Live demo here](http://enigmatic-badlands-3535.herokuapp.com/)
 
