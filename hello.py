@@ -2,7 +2,7 @@ import web
 import os
 from pymongo import MongoClient
 client = MongoClient(os.environ.get("HT_MONGO_URL"));
-db = cleint.testdb1
+db = client.testdb1
 col = db.testData
 
 urls = (
