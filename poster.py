@@ -1,13 +1,22 @@
 import facebook
 import sys
+import os
+import time
+from datetime import datetime
 
-#rather than args can we load sessionKey and pageID from Heroku ENV VARS?
 
 #all args are strings
 # can expand with text attachments and "custom stories" if we really want
-def makeTextPost(sessionKey, pageID, content):
-	graph = facebook.GraphAPI(sessionKey)
+
+sessionKey = os.environ['FB_SESSION_KEY']
+pageID = os.environ['FB_PAGE_ID']
+graph = facebook.GraphAPI(sessionKey)
+def makeTextPost(content):
 	graph.put_object(pageID, "feed", message=content)
-	
+
 if __name__ == "__main__":
-	makeTextPost(sys.argv[1], sys.argv[2], sys.argv[3])
+	interval = int(sys.argv[1])
+	makeTextPost("py post at time " + str(datetime.now()))
+	while True:
+		time.sleep(interval)
+		makeTextPost("py post at time " + str(datetime.now()))
