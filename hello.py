@@ -1,12 +1,20 @@
 import web
+import os
+from pymongo import MongoClient
+client = MongoClient(os.environ.get("HT_MONGO_URL"));
+db = cleint.testdb1
+col = db.testData
 
 urls = (
     '/', 'index'
 )
 
+
+
 class index:
     def GET(self):
-        return "Hello, Princeton!"
+	database_stuff = list(col.find());
+        return str(database_stuff);
 
 # For serving WSGI
 wsgi_app = web.application(urls, globals()).wsgifunc()
