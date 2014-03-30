@@ -1,0 +1,21 @@
+$def with (tokenVal)
+
+<!DOCTYPE html>
+<html>
+<head> 
+<title>TestHackTrack</title>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="static/createRepo.js"></script>
+</head>
+
+<body>
+	Hello Potatoless World... :(
+
+	<form id="crtRepo" action="create">
+		<input type="hidden" name="access_token" value="$tokenVal"></input>
+		<input type="text" name="name"></input>
+		<button type="submit">Create this repo</button>
+	</form>
+</body>
+
+</html>

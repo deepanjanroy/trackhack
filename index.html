@@ -1,0 +1,19 @@
+$def with (client)
+
+<!DOCTYPE html>
+<html>
+<head> 
+<title>TestHackTrack</title>
+</head>
+
+<body>
+	Hello Potatoless World... :(
+
+	<form action="https://github.com/login/oauth/authorize">
+		<input type="hidden" name="client_id" value="$client"></input>
+		<input type="hidden" name="scope" value="user,repo">
+		<button type="submit">Get dat OAuth!</button>
+	</form>
+</body>
+
+</html>
