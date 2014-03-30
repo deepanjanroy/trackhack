@@ -10,8 +10,8 @@ github_client_id = os.environ.get("GITHUB_CLIENT_ID")
 github_secret_id = os.environ.get("GITHUB_SECRET_ID")
 
 urls = (
+    '/', 'authenticate',
     '/test', 'test',
-    '/enter', 'authenticate',
     '/login_success', 'login_success',
 )
 
