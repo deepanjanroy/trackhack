@@ -27,7 +27,7 @@ class login_success:
 
 class test:
     def GET(self):
-        render = web.template.render('static/test')
+        render = web.template.render('https://s3.amazonaws.com/trackhack/static/test')
         return render.fbauth()
 
 
