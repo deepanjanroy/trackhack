@@ -20,12 +20,7 @@ $def with(git_client_id, github_username, github_complete)
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
   <script src="https://s3.amazonaws.com/trackhack/static/semantic/packaged/javascript/semantic.js"></script>
   <!-- // <script src="https://s3.amazonaws.com/trackhack/static/semantic/examples/homepage.js"></script> -->
-  <script src="/static/semantic/examples/homepage.js"></script>
-  <script>window.github_username="$github_username";
-          window.github_client_id = "$git_client_id";
-          window.github_setup_complete = $github_complete;
-          // window.github_user =
-  </script>
+  <script src="static/js/userhome.js"></script>
 
   <!-- Facebook login -->
 
@@ -65,9 +60,7 @@ $def with(git_client_id, github_username, github_complete)
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-      window.facebook_setup_complete=true;
-      window.fb_user_id = response.id;
-      try_login();
+      window.user_profile=get_current_user_profile(response.id);
       console.log('Good to see you, ' + response.name + '.');
     });
   console.log(FB.getAuthResponse);
@@ -99,10 +92,12 @@ $def with(git_client_id, github_username, github_complete)
     </div>
   </div>
 
+  <div id="th_content"></div>
+
+
   <script>
-  if (! window.github_setup_complete) {
-    window.location.replace("https://github.com/login/oauth/authorize/?client_id=" + window.github_client_id + "&scope=user,repo");
-  }</script>
+
+  </script>
 
 </body>
 

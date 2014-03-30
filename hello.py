@@ -1,10 +1,13 @@
 import web
 import os
 import urllib2
+import requests
+import requests
+import json
 from pymongo import MongoClient
+from bson import json_util
 client = MongoClient(os.environ.get("TH_MONGO_URL"));
-db = client.testdb1
-col = db.testData
+db = client.trackhackdb
 
 github_client_id = os.environ.get("GITHUB_CLIENT_ID")
 github_secret_id = os.environ.get("GITHUB_SECRET_ID")
@@ -13,9 +16,23 @@ urls = (
     '/', 'authenticate',
     '/test', 'test',
     '/login_success', 'login_success',
+    '/userhome', 'userhome',
+    '/api/user_profile/fb/(.*)', 'user_profile'
 )
 
 render = web.template.render('templates/')
+
+class user_profile:
+    def GET(self, facebook_id):
+        user = db.users.find_one({"facebook_id": facebook_id})
+        if user is not None:
+            return json_util.dumps(user)
+        else:
+            return "false"
+
+class userhome:
+    def GET(self):
+        return render.userhome("","","")
 
 
 class login_success:
@@ -36,11 +53,17 @@ class authenticate:
         render = web.template.render('templates')
         user_data = web.input()
         if hasattr(user_data, "code"):
-            url = urllib2.urlopen("https://github.com/login/oauth/access_token", "scope=user,repo&client_id=" + github_client_id + "&client_secret=" + github_secret_id + "&code=" + user_data.code)
-            resp = url.read().replace('=', '&').split('&')
-            access_token = resp[0]
-            # from IPython import embed; embed()
-            return render.enter(github_client_id, access_token, "true")
+
+            payload = {"client_id": github_client_id, "client_secret": github_secret_id, "code": user_data.code}
+            headers = {"content-type": "application/json"}
+            url = "https://github.com/login/oauth/access_token"
+            r = requests.post(url, json.dumps(payload), headers=headers)
+            access_token_line = r.text
+
+            url = "https://api.github.com/user?" + access_token_line
+            r = requests.get(url)
+            github_username = r.json()['login']
+            return render.enter(github_client_id, github_username, "true")
 
         return render.enter(github_client_id, "", "false")
 
