@@ -7,22 +7,27 @@ col = db.testData
 
 urls = (
     '/', 'index',
-    '/test', 'test'
+    '/test', 'test',
+	'/enter', 'authenticate'
 )
+
+render = web.template.render('templates/')
+
 
 class test:
     def GET(self):
         render = web.template.render('static/test')
         return render.fbauth()
 
-class index:
-    # def GET(self):
-    # 	database_stuff = list(col.find());
-    #     return str(database_stuff);
-
-    def GET(self):
-        render = web.template.render('templates')
-        return render.index()
+		
+class authenticate:
+	def GET(self):
+		#double authentication across the skyyyy
+		
+		render = web.template.render('static/enter')
+		
+		return render.enter()
+		#wow wooooow so intense
 
 
 # For serving WSGI
