@@ -1,4 +1,4 @@
-$def with (client)
+$def with(git_client_id, github_access_token, github_complete)
 
 <!DOCTYPE html>
 <html>
@@ -20,6 +20,11 @@ $def with (client)
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
   <script src="static/semantic/packaged/javascript/semantic.js"></script>
   <script src="static/semantic/examples/homepage.js"></script>
+  <script>window.github_access_token="$github_access_token";
+          window.github_client_id = "$git_client_id";
+          window.github_setup_complete = $github_complete;
+          // window.github_user =
+  </script>
 
   <!-- Facebook login -->
 
@@ -83,7 +88,7 @@ $def with (client)
         <div class="column">
           <p>
           <form action="https://github.com/login/oauth/authorize">
-            <input type="hidden" name="client_id" value="$client"></input>
+            <input type="hidden" name="client_id" value="$git_client_id"></input>
             <input type="hidden" name="scope" value="user,repo">
             <button type="submit">Get dat OAuth!</button>
           </form>
@@ -92,6 +97,11 @@ $def with (client)
       </div>
     </div>
   </div>
+
+  <script>
+  if (! window.github_setup_complete) {
+    window.location.replace("https://github.com/login/oauth/authorize/?client_id=" + window.github_client_id + "&scope=user,repo");
+  }</script>
 
 </body>
 
