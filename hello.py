@@ -19,13 +19,12 @@ class test:
         render = web.template.render('static/test')
         return render.fbauth()
 
-		
+
 class authenticate:
 	def GET(self):
 		#double authentication across the skyyyy
-		
-		render = web.template.render('static/enter')
-		
+
+		render = web.template.render('templates/')
 		return render.enter()
 		#wow wooooow so intense
 
