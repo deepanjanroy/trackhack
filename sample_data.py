@@ -115,7 +115,7 @@ beta_users = [
 			},
 			
 			{
-				"Name:": "Daphnne Chacon",
+				"Name": "Daphnne Chacon",
 				"facebook_id": "1378550369",
 				"github_username": "daphchacon",
 				"projects": [],
