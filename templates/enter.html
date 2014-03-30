@@ -1,3 +1,5 @@
+$def with (client)
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,7 +81,13 @@
 		  <p><fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button></p>
         </div>
         <div class="column">
-          <p><a class="ui teal right labeled icon button" href="#" id="github">Github <i class="right long arrow icon"></i></a></p>
+          <p>
+          <form action="https://github.com/login/oauth/authorize">
+            <input type="hidden" name="client_id" value="$client"></input>
+            <input type="hidden" name="scope" value="user,repo">
+            <button type="submit">Get dat OAuth!</button>
+          </form>
+          </p>
         </div>
       </div>
     </div>
